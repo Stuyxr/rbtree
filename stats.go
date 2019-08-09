@@ -55,10 +55,12 @@ func (t *Rbtree) Get(item Item) Item {
 	return ret.Item
 }
 
-//TODO: This is for debug, delete it in the future
-func (t *Rbtree) Search(item Item) *Node {
+func (t *Rbtree) Search(item Item) Item {
+	return t.search(&Node{t.NIL, t.NIL, t.NIL, RED, item}).Item
+}
 
-	return t.search(&Node{t.NIL, t.NIL, t.NIL, RED, item})
+func (t *Rbtree) SearchLe(item Item) Item {
+	return t.searchLe(&Node{t.NIL, t.NIL, t.NIL, RED, item}).Item
 }
 
 func (t *Rbtree) Min() Item {
@@ -79,4 +81,18 @@ func (t *Rbtree) Max() Item {
 	}
 
 	return x.Item
+}
+
+func (t *Rbtree) Precursor(item Item) Item {
+	if item == nil {
+		return nil
+	}
+	return t.precursor(t.search(&Node{t.NIL, t.NIL, t.NIL, RED, item})).Item
+}
+
+func (t *Rbtree) Successor(item Item) Item {
+	if item == nil {
+		return nil
+	}
+	return t.successor(t.search(&Node{t.NIL, t.NIL, t.NIL, RED, item})).Item
 }

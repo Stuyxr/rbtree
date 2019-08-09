@@ -19,15 +19,15 @@ type Node struct {
 	Left   *Node
 	Right  *Node
 	Parent *Node
-	Color  uint
+	Color  bool
 
 	// for use by client.
 	Item
 }
 
 const (
-	RED   = 0
-	BLACK = 1
+	RED   = true
+	BLACK = false
 )
 
 type Item interface {
@@ -293,7 +293,31 @@ func (t *Rbtree) search(x *Node) *Node {
 	return p
 }
 
-//TODO: Need Document
+func (t *Rbtree) searchLe(x *Node) *Node {
+	p := t.root
+	n := p
+
+	for n != t.NIL {
+		if less(n.Item, x.Item) {
+			p = n
+			n = n.Right
+		} else if less(x.Item, n.Item) {
+			p = n
+			n = n.Left
+		} else {
+			return n
+			break
+		}
+	}
+	if less(p.Item, x.Item) {
+		return p
+	}
+
+	p = t.precursor(p)
+
+	return p
+}
+
 func (t *Rbtree) successor(x *Node) *Node {
 	if x == t.NIL {
 		return t.NIL
@@ -312,7 +336,24 @@ func (t *Rbtree) successor(x *Node) *Node {
 	return y
 }
 
-//TODO: Need Document
+func (t *Rbtree) precursor(x *Node) *Node {
+	if x == t.NIL {
+		return t.NIL
+	}
+
+	// Get the minimum from the right sub-tree if it existed.
+	if x.Left != t.NIL {
+		return t.max(x.Left)
+	}
+
+	y := x.Parent
+	for y != t.NIL && x == y.Left {
+		x = y
+		y = y.Parent
+	}
+	return y
+}
+
 func (t *Rbtree) delete(key *Node) *Node {
 	z := t.search(key)
 
