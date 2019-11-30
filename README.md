@@ -1,6 +1,6 @@
 # Rbtree  [![GoDoc](https://godoc.org/github.com/HuKeping/rbtree?status.svg)](https://godoc.org/github.com/HuKeping/rbtree)
 
-This is an implementation of Red-Black tree written by Golang. Modified by Stuyxr.
+This is an implementation of Red-Black tree written by Golang.
 
 ## Installation
 
