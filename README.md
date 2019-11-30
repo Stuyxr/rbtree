@@ -1,6 +1,6 @@
 # Rbtree  [![GoDoc](https://godoc.org/github.com/HuKeping/rbtree?status.svg)](https://godoc.org/github.com/HuKeping/rbtree)
 
-This is an implementation of Red-Black tree written by Golang.
+This is an implementation of Red-Black tree written by Golang. Modified by Stuyxr.
 
 ## Installation
 
@@ -35,7 +35,7 @@ which will be store in the Red-Black tree, here are some examples.
 			}
 			m++
 		}
-
+	
 		// 1, 3, 5, 7, 9 were expected.
 		rbt.Ascend(rbt.Min(), Print)
 	}
@@ -62,7 +62,7 @@ which will be store in the Red-Black tree, here are some examples.
 	
 		rbt.Insert(rbtree.String("Hello"))
 		rbt.Insert(rbtree.String("World"))
-
+	
 		rbt.Ascend(rbt.Min(), Print)
 	}
 	
